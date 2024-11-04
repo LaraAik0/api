@@ -102,18 +102,19 @@ app.use(cors({
 // Define a porta do servidor
 const PORT = 5000;
 
-// Conecte-se ao MongoDB usando a URL fornecida para o MongoDB Atlas
-const mongoURI = 'mongodb+srv://larasagaiif:iiw2022@projeto.9fh2p.mongodb.net/?retryWrites=true&w=majority&appName=projeto';
+const mongoose = require('mongoose');
+
+const mongoURI = 'mongodb+srv://larasagaiif:iiw2022@projeto.9fh2p.mongodb.net/projeto?retryWrites=true&w=majority';
 
 mongoose.connect(mongoURI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true // Se você estiver criando índices
 })
-  .then(() => console.log("Conectado ao MongoDB Atlas"))
-  .catch(err => {
-    console.error("Erro ao conectar ao MongoDB Atlas:", err);
-    process.exit(1); // Encerra o servidor caso a conexão com o banco falhe
-  });
+
+.then(() => console.log('Conectado ao MongoDB Atlas'))
+.catch(err => console.error('Erro ao conectar ao MongoDB Atlas:', err));
+
 
 // Criação do modelo de usuário
 const userSchema = new mongoose.Schema({
